@@ -1,0 +1,156 @@
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+code {
+  font-size: 0.8em;
+  font-family: monospace;
+}
+
+html,
+body,
+#root {
+  margin: auto;
+  padding: 0;
+  height: 100vh;
+  max-width: 120vh;
+}
+
+a {
+  color: #453e4d;
+}
+
+header {
+  padding: 5px 20px;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 20px;
+}
+
+#columns {
+  display: flex;
+  gap: 20px;
+}
+
+#input {
+  display: flex;
+  width: 320px;
+  max-height: 512px;
+  border: 5px solid #342f3a;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+#input.hover {
+  border: 5px dashed #342f3a;
+}
+
+#input span {
+  position: absolute;
+  margin-top: 50%;
+  margin-bottom: 50%;
+}
+
+#output {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  border: 5px solid #342f3a;
+  border-radius: 16px;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+#output .row {
+  border-bottom: 1px solid #342f3a;
+  height: 42px;
+  display: block;
+  align-content: center;
+  cursor: pointer;
+}
+
+#output .row:hover {
+  background-color: #eee;
+}
+
+#output span a {
+  text-decoration: none;
+  display: block;
+  padding: 8px;
+}
+
+#output .gap {
+  flex-grow: 1;
+  border-bottom: 1px solid #342f3a;
+}
+
+#output .zip {
+  font-weight: bold;
+}
+
+#input canvas {
+  width: 512px;
+  height: 512px;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+#input,
+#output {
+  position: relative;
+  min-height: 256px;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+#input.has-content > .placeholder,
+#output:has(> :not(.placeholder)) > .placeholder {
+  display: none;
+}
+
+#toolbar {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  border: 1px solid #342f3a;
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+  background-color: #ad9cc1;
+}
+
+#toolbar input {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  flex-grow: 1;
+}
+
+#log {
+  background-color: #342f3a;
+  color: #eee;
+  padding: 20px;
+  border-radius: 0 0 5px 5px;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre;
+  max-height: 260px;
+  margin: 0;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.8em;
+}

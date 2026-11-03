@@ -3,6 +3,7 @@ DEL = rm -f
 SRCDIR = src
 OBJDIR = obj
 BINDIR = bin
+WEBDIR = web
 
 # Extra source dirs (these should be under SRCDIR)
 LODEPNGDIR = $(SRCDIR)/lodepng
@@ -42,10 +43,10 @@ endif
 BIN_NAME = png2hicolorgb
 BIN = $(BINDIR)/$(BIN_NAME)$(EXTRA_FNAME)
 BIN_WIN = $(BIN).exe
-
+WEB_BIN = $(WEBDIR)/${BIN_NAME}
 
 # ignore package dicrectory that conflicts with rule target
-.PHONY: package
+.PHONY: package web
 
 all: linux
 
@@ -72,6 +73,22 @@ linux: CC = gcc
 linux: LDFLAGS = -s #lm
 linux: $(COBJ)
 	$(CC) $(CFLAGS) -o $(BIN) $^ $(LDFLAGS)
+
+# Requires emscripten
+web_build: CC = emcc
+web_build: CFLAGS = $(INCS) -O2
+web_build: LDFLAGS = -s INVOKE_RUN=0 # Don't run main automatically
+web_build: LDFLAGS += -s ALLOW_MEMORY_GROWTH=1
+web_build: LDFLAGS += -s EXPORTED_RUNTIME_METHODS='["FS","callMain"]'
+web_build: LDFLAGS += -s STACK_SIZE=65536
+web_build: LDFLAGS += -s MODULARIZE=1
+web_build: $(COBJ)
+	mkdir -p $(dir $(WEB_BIN))
+	$(CC) -o $(WEB_BIN).js $^ $(LDFLAGS)
+
+web:
+	${MAKE} clean
+	${MAKE} web_build
 
 cleanobj:
 	$(DEL) $(COBJ) $(DEPS)

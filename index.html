@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="./web/script.js"></script>
+    <script type="text/javascript" src="./web/jszip.js"></script>
+    <link href="web/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header>
+      <h1>png2hicolorgb web</h1>
+    </header>
+
+    <div id="content">
+      <div id="columns">
+        <div id="input">
+          <span class="placeholder">Drop a png file</span>
+          <canvas width="320" height="256"></canvas>
+        </div>
+
+        <div id="output">
+          <span class="placeholder">Generated files will appear here</span>
+        </div>
+      </div>
+
+      <div id="toolbar">
+        <button id="clear" onClick="clearLog()">Clear</button>
+        <button id="help" onClick="handleHelp()">Help</button>
+
+        <input id="options" value="--csource --bank=255" />
+
+        <button id="convert" onClick="handleConvert()">Convert</button>
+      </div>
+
+      <code id="log"></code>
+    </div>
+
+    <footer>
+      <p>
+        Hi-Color converter for the Game Boy Color :
+        <a href="https://github.com/bbbbbr/png2hicolorgb/" target="_blank"
+          >GitHub</a
+        >
+      </p>
+      <p>
+        Processing for this tool runs on your local computer, no image data is
+        uploaded or sent over the network.
+      </p>
+    </footer>
+
+    <input type="file" id="filepicker" multiple style="display: none" />
+
+    <script>
+      load();
+    </script>
+  </body>
+</html>
